@@ -1,9 +1,3 @@
-/**
-   * Create By Dika Ardnt.
-   * Contact Me on wa.me/6288292024190
-   * Follow https://github.com/DikaArdnt
-*/
-
 require('./config')
 const { BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType } = require('@adiwajshing/baileys')
 const fs = require('fs')
@@ -21,6 +15,7 @@ const { performance } = require('perf_hooks')
 const { Primbon } = require('scrape-primbon')
 const primbon = new Primbon()
 const { smsg, formatp, tanggal, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom, getGroupAdmins } = require('./lib/myfunc')
+const instagramGetUrl = require('instagram-url-direct')
 
 // read database
 let tebaklagu = db.data.game.tebaklagu = []
@@ -2026,6 +2021,23 @@ const size = await yt.video[q].fileSizeH
                 ndaa.sendText(m.chat, `⭔ *Hasil :* ${anu.message}`, m)
             }
             break
+        case 'ig': case 'igdl': {
+            if (!text) throw `Masukan URL!\n\n*Contoh :* ${usedPrefix}${command} https://www.instagram.com/p/ByxKbUSnubS/?utm_source=ig_web_copy_link`
+            m.reply(mess.wait)
+            const results = (await instagramGetUrl(text)).url_list[0]
+            let buttons = [
+                    {buttonId: `donasi`, buttonText: {displayText: '► Donasi'}, type: 1},
+                ]
+                let buttonMessage = {
+                    video: { url: epep.download.nowm },
+                    caption: `Download From ${text}`,
+                    footer: 'Press The Button Below',
+                    buttons: buttons,
+                    headerType: 5
+                }
+                ndaa.sendMessage(m.chat, buttonMessage, { quoted: m })
+        }
+        break
             case 'tiktok': case 'tiktoknowm': {
                 if (!text) throw 'Masukkan Query Link!'
                 m.reply(mess.wait)
